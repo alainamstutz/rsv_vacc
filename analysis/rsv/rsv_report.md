@@ -42,53 +42,23 @@ Before constructing any flags:
 
 #### Data sources
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Source                                                                                                                                                                                                                     | Selection                                                                                                                                                   |
-+============================================================================================================================================================================================================================+=============================================================================================================================================================+
-| [`vaccinations`](https://docs.opensafely.org/ehrql/reference/schemas/tpp/#vaccinations) and [reference table](https://reports.opensafely.org/reports/opensafely-tpp-database-reference-values/#VaccinationReference-Table) | Target disease (column name: VaccinationContent) ==`"HUMAN RESPIRATORY SYNCYTIAL VIRUS"`                                                                    |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| [`clinical_events`](https://docs.opensafely.org/ehrql/reference/schemas/tpp/#clinical_events)                                                                                                                              | [RSVADMIN_COD](https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/rsvadmin_cod/20260630/) (2 codes)                                    |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| [`medications`](https://docs.opensafely.org/ehrql/reference/schemas/tpp/#medications)                                                                                                                                      | RSV vaccine dm+d codelist? TBD. Check: <https://www.opencodelists.org/codelist/opensafely/bnf-chapter-14-immunological-products-and-vaccines-dmd/59ae8754/> |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| `practice_registrations`, `ons_deaths`                                                                                                                                                                                     | Registered and alive on the vaccination date                                                                                                                |
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Source | Selection |
+|---|---|
+| [`vaccinations`](https://docs.opensafely.org/ehrql/reference/schemas/tpp/#vaccinations) and [reference table](https://reports.opensafely.org/reports/opensafely-tpp-database-reference-values/#VaccinationReference-Table) | Target disease (column name: VaccinationContent) ==`"HUMAN RESPIRATORY SYNCYTIAL VIRUS"` |
+| [`clinical_events`](https://docs.opensafely.org/ehrql/reference/schemas/tpp/#clinical_events) | [RSVADMIN_COD](https://www.opencodelists.org/codelist/nhsd-primary-care-domain-refsets/rsvadmin_cod/20260630/) (2 codes) |
+| [`medications`](https://docs.opensafely.org/ehrql/reference/schemas/tpp/#medications) | RSV vaccine dm+d codelist? TBD. Check: <https://www.opencodelists.org/codelist/opensafely/bnf-chapter-14-immunological-products-and-vaccines-dmd/59ae8754/> |
+| `practice_registrations`, `ons_deaths` | Registered and alive on the vaccination date |
 
 #### Programme phases
 
-+-------------------------------------+------------------+--------------------------------------------------------------------+---------------------------------------+------------------------------------------------------------+
-| phase_label                         | phase_start_date | NHS programme: older adults                                        | NHS programme: pregnancy              | Outside the NHS programme                                  |
-+=====================================+==================+====================================================================+=======================================+============================================================+
-| Pre-licence                         | 1900-01-01       | None                                                               | None                                  | No licensed product. Trial products only.                  |
-+-------------------------------------+------------------+--------------------------------------------------------------------+---------------------------------------+------------------------------------------------------------+
-| Pre-programme                       | 2023-07-10       | None                                                               | None                                  | - Arexvy from 2023-07-10 (approval date source see below)  |
-|                                     |                  |                                                                    |                                       |                                                            |
-|                                     |                  |                                                                    |                                       | - Abrysvo from 2023-11-29 (approval date source see below) |
-+-------------------------------------+------------------+--------------------------------------------------------------------+---------------------------------------+------------------------------------------------------------+
-| Launch                              | 2024-09-01       | Abrysvo for:                                                       | Abrysvo from week 28, every pregnancy | - Abrysvo, Arexvy                                          |
-|                                     |                  |                                                                    |                                       |                                                            |
-|                                     |                  | - routine cohort, from the 75th birthday                           |                                       | - mRESVIA from 2025-02-28 (approval date source see below) |
-|                                     |                  |                                                                    |                                       |                                                            |
-|                                     |                  | - catch-up cohort, all year, including those turning 80            |                                       | (only Abrysvo licensed for pregnancy)                      |
-+-------------------------------------+------------------+--------------------------------------------------------------------+---------------------------------------+------------------------------------------------------------+
-| Year two                            | 2025-09-01       | Abrysvo for:                                                       | Abrysvo from week 28, every pregnancy | Abrysvo, Arexvy, mRESVIA                                   |
-|                                     |                  |                                                                    |                                       |                                                            |
-|                                     |                  | - routine cohort, from the 75th birthday                           |                                       | (only Abrysvo licensed for pregnancy)                      |
-|                                     |                  |                                                                    |                                       |                                                            |
-|                                     |                  | - catch-up cohort, until the 80th birthday                         |                                       |                                                            |
-+-------------------------------------+------------------+--------------------------------------------------------------------+---------------------------------------+------------------------------------------------------------+
-| Year two, adding 80+ and care homes | 2026-04-01       | Abrysvo for:                                                       | Abrysvo from week 28, every pregnancy | Abrysvo, Arexvy, mRESVIA                                   |
-|                                     |                  |                                                                    |                                       |                                                            |
-|                                     |                  | - everyone aged 75+, no upper age limit                            |                                       | (only Abrysvo licensed for pregnancy)                      |
-|                                     |                  |                                                                    |                                       |                                                            |
-|                                     |                  | - adult residents of care homes for older adults, any age          |                                       |                                                            |
-+-------------------------------------+------------------+--------------------------------------------------------------------+---------------------------------------+------------------------------------------------------------+
-| Year three, adding at-risk 65-74y   | 2026-09-01       | Abrysvo for:                                                       | Abrysvo from week 28, every pregnancy | Abrysvo, Arexvy, mRESVIA                                   |
-|                                     |                  |                                                                    |                                       |                                                            |
-|                                     |                  | - everyone aged 75+ and care home residents, as above              |                                       | (only Abrysvo licensed for pregnancy)                      |
-|                                     |                  |                                                                    |                                       |                                                            |
-|                                     |                  | - aged 65-74 with chronic respiratory disease or immunosuppression |                                       |                                                            |
-+-------------------------------------+------------------+--------------------------------------------------------------------+---------------------------------------+------------------------------------------------------------+
+| phase_label | phase_start_date | NHS programme: older adults | NHS programme: pregnancy | Outside the NHS programme |
+|---|---|---|---|---|
+| Pre-licence | 1900-01-01 | None | None | No licensed product. Trial products only. |
+| Pre-programme | 2023-07-10 | None | None | - Arexvy from 2023-07-10 (approval date source see below)<br>- Abrysvo from 2023-11-29 (approval date source see below) |
+| Launch | 2024-09-01 | Abrysvo for:<br>- routine cohort, from the 75th birthday<br>- catch-up cohort, all year, including those turning 80 | Abrysvo from week 28, every pregnancy | - Abrysvo, Arexvy<br>- mRESVIA from 2025-02-28 (approval date source see below)<br>(only Abrysvo licensed for pregnancy) |
+| Year two | 2025-09-01 | Abrysvo for:<br>- routine cohort, from the 75th birthday<br>- catch-up cohort, until the 80th birthday | Abrysvo from week 28, every pregnancy | Abrysvo, Arexvy, mRESVIA<br>(only Abrysvo licensed for pregnancy) |
+| Year two, adding 80+ and care homes | 2026-04-01 | Abrysvo for:<br>- everyone aged 75+, no upper age limit<br>- adult residents of care homes for older adults, any age | Abrysvo from week 28, every pregnancy | Abrysvo, Arexvy, mRESVIA<br>(only Abrysvo licensed for pregnancy) |
+| Year three, adding at-risk 65-74y | 2026-09-01 | Abrysvo for:<br>- everyone aged 75+ and care home residents, as above<br>- aged 65-74 with chronic respiratory disease or immunosuppression | Abrysvo from week 28, every pregnancy | Abrysvo, Arexvy, mRESVIA<br>(only Abrysvo licensed for pregnancy) |
 
 - Each phase ends the day before the next starts. The last phase ends at `end_date`.
 - **Routine cohort:** turning 75 on or after 2024-09-01, i.e. born September 1949 or later.
@@ -116,31 +86,21 @@ Before constructing any flags:
 
 #### Product lookup and approval dates
 
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| code        | TPP `product_name`                                                                                                                                        | UK approval | website                                                                                                                                                                                                             |
-+=============+===========================================================================================================================================================+=============+=====================================================================================================================================================================================================================+
-| abrysvo     | Abrysvo vaccine powder and solvent for solution for injection 0.5ml vials (Pfizer)                                                                        | 2023-11-29  | [news blog](https://pmlive.com/pharma_news/pfizers_rsv_vaccine_granted_mhra_approval_to_protect_infants_and_older_adults_1504343) (exact date a bit unsure)                                                         |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| arexvy      | Arexvy vaccine inj 0.5ml vials (GlaxoSmithKline UK Ltd)                                                                                                   | 2023-07-10  | [GSK](https://www.gsk.com/en-gb/media/press-releases/medicines-and-healthcare-products-regulatory-agency-authorises-gsk-s-arexvy-the-first-respiratory-syncytial-virus-rsv-vaccine-for-older-adults/) press release |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| mresvia     | ??? (not found yet in TPP [reference table](https://reports.opensafely.org/reports/opensafely-tpp-database-reference-values/#VaccinationReference-Table)) | 2025-02-28  | [Moderna](https://www.accessnewswire.com/newsroom/en/healthcare-and-pharmaceutical/moderna-receives-medicines-and-healthcare-products-regulatory-agency-m-993322) press release                                     |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| unspecified | Respiratory Syncytial Virus (RSV) vaccine                                                                                                                 | n/a         | TPP [reference table](https://reports.opensafely.org/reports/opensafely-tpp-database-reference-values/#VaccinationReference-Table)                                                                                  |
-+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| code | TPP `product_name` | UK approval | website |
+|---|---|---|---|
+| abrysvo | Abrysvo vaccine powder and solvent for solution for injection 0.5ml vials (Pfizer) | 2023-11-29 | [news blog](https://pmlive.com/pharma_news/pfizers_rsv_vaccine_granted_mhra_approval_to_protect_infants_and_older_adults_1504343) (exact date a bit unsure) |
+| arexvy | Arexvy vaccine inj 0.5ml vials (GlaxoSmithKline UK Ltd) | 2023-07-10 | [GSK](https://www.gsk.com/en-gb/media/press-releases/medicines-and-healthcare-products-regulatory-agency-authorises-gsk-s-arexvy-the-first-respiratory-syncytial-virus-rsv-vaccine-for-older-adults/) press release |
+| mresvia | ??? (not found yet in TPP [reference table](https://reports.opensafely.org/reports/opensafely-tpp-database-reference-values/#VaccinationReference-Table)) | 2025-02-28 | [Moderna](https://www.accessnewswire.com/newsroom/en/healthcare-and-pharmaceutical/moderna-receives-medicines-and-healthcare-products-regulatory-agency-m-993322) press release |
+| unspecified | Respiratory Syncytial Virus (RSV) vaccine | n/a | TPP [reference table](https://reports.opensafely.org/reports/opensafely-tpp-database-reference-values/#VaccinationReference-Table) |
 
 #### Product flags
 
-+---------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Flag                      | Definition                                                    | Interpretation                                                                                                                                       |
-+===========================+===============================================================+======================================================================================================================================================+
-| Unspecified product       | `vax_product == "unspecified"`                                | Incomplete coding, possibly from an external source (e.g. maternity or pharmacy records?). May still be a programme vaccine, most likely Abrysvo?    |
-+---------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Non-NHS programme product | arexvy or mresvia from 2024-09-01                             | Vaccine given outside the programme, or product miscoded. Still counts as an RSV vaccination.                                                        |
-+---------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Before approval           | `vax_date` before the product's UK approval date              | Error or trial participation                                                                                                                         |
-+---------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Child                     | Age under 18 on `vax_date`, unless a possible maternal record | Administration error, or an infant antibody recorded as a vaccine? Arexvy and mRESVIA under 18 are always flagged, Abrysvo could indicate pregnancy? |
-+---------------------------+---------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Flag | Definition | Interpretation |
+|---|---|---|
+| Unspecified product | `vax_product == "unspecified"` | Incomplete coding, possibly from an external source (e.g. maternity or pharmacy records?). May still be a programme vaccine, most likely Abrysvo? |
+| Non-NHS programme product | arexvy or mresvia from 2024-09-01 | Vaccine given outside the programme, or product miscoded. Still counts as an RSV vaccination. |
+| Before approval | `vax_date` before the product's UK approval date | Error or trial participation |
+| Child | Age under 18 on `vax_date`, unless a possible maternal record | Administration error, or an infant antibody recorded as a vaccine? Arexvy and mRESVIA under 18 are always flagged, Abrysvo could indicate pregnancy? |
 
 ------------------------------------------------------------------------
 
@@ -174,19 +134,13 @@ Grouped by `patient_id`, `vax_date` and `vax_product` (or not), as in the COVID-
 
 ### 3.5 Eligibility on the Vaccination Date
 
-+--------------------+----------------------------------------------------------------------------------------------------------------+
-| eligibility_status | Definition                                                                                                     |
-+====================+================================================================================================================+
-| eligible_age       | Age rule for the phase met (see above)                                                                         |
-+--------------------+----------------------------------------------------------------------------------------------------------------+
-| possible_maternal  | Possible maternal record, just based on female aged 14-50y (more complex stuff re preg algo for later)         |
-+--------------------+----------------------------------------------------------------------------------------------------------------+
-| possible_at_risk   | Aged 65-74 from 2026-09-01, and a chronic respiratory disease or immunosuppression codelists (from JCVI work?) |
-+--------------------+----------------------------------------------------------------------------------------------------------------+
-| possible_care_home | Aged 18-74 from 2026-04-01 and a care home code (or address matching)                                          |
-+--------------------+----------------------------------------------------------------------------------------------------------------+
-| not_eligible       | None of the above                                                                                              |
-+--------------------+----------------------------------------------------------------------------------------------------------------+
+| eligibility_status | Definition |
+|---|---|
+| eligible_age | Age rule for the phase met (see above) |
+| possible_maternal | Possible maternal record, just based on female aged 14-50y (more complex stuff re preg algo for later) |
+| possible_at_risk | Aged 65-74 from 2026-09-01, and a chronic respiratory disease or immunosuppression codelists (from JCVI work?) |
+| possible_care_home | Aged 18-74 from 2026-04-01 and a care home code (or address matching) |
+| not_eligible | None of the above |
 
 - One person can fulfill several eligibility criteria
 
